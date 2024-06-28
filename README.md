@@ -1,3 +1,6 @@
+Group 7: Meetings on Wednesdays 8:00pm
+Group members: Agustin Pariente, Nicolas Pariente, Bri Christiansen, Victor Boxall, Rama Bhagi
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
