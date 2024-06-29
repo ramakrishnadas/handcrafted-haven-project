@@ -4,14 +4,14 @@ import Image from "next/image";
 export default function Page() {
   return (
     <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
+      <div className="flex h-20 shrink-0 items-center justify-center rounded-lg bg-customGreen p-4 md:h-52">
         {/* Insert logo here */}
-        <h1 className="text-5xl font-bold text-center text-gray-800 mt-4 mb-2">
+        <h1 className="text-2xl md:text-5xl font-bold text-center text-white mt-4 mb-2">
           Handcrafted Haven
         </h1>
       </div>
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
+      <div className="mt-4 flex grow flex-col gap-4">
+        <div className="flex flex-col justify-center items-center gap-6 rounded-lg bg-gray-100 px-6 py-10 md:w-5/5 md:px-20">
           {/*<div
           className="h-0 w-0 border-b-[30px] border-l-[20px] border-r-[20px] border-b-black border-l-transparent border-r-transparent"
         />*/}
@@ -24,12 +24,12 @@ export default function Page() {
           </p>
           <Link
             href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+            className="flex justify-center items-center gap-5 self-start md:self-center md:w- rounded-lg bg-customGreen px-10 py-4 text-sm font-medium text-white transition-colors hover:bg-green-400 md:text-2xl"
           >
             <span>Log in</span>
           </Link>
         </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
+        <div className="flex items-center justify-center p-6 md:w-5/5 md:px-28 md:py-12 rounded-lg shadow-xl">
           {/* Add Hero Image Here */}
           {/* <Image 
             src=""
