@@ -1,8 +1,10 @@
 // src/app/dashboard/page.tsx
+
 "use client";
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Product {
     id: number;
@@ -75,16 +77,16 @@ const Dashboard = () => {
         });
 
     return (
-        <div className="flex">
-            {/* Sidebar */}
-            <aside className="w-1/4 p-4 bg-gray-100">
+        <div className="flex flex-col md:flex-row">
+            {/* Filters */}
+            <div className="w-full p-4 bg-gray-100 md:w-1/4">
                 <h2 className="text-xl font-bold mb-4">Filters</h2>
-                <ul>
+                <ul className="flex flex-col md:flex-col">
                     <li className="mb-4">
                         <strong>Category</strong>
-                        <ul>
+                        <ul className="flex md:flex-col">
                             {categories.map(category => (
-                                <li key={category} className="mb-2">
+                                <li key={category} className="mb-2 md:mb-0 md:mr-2">
                                     <button
                                         className={`text-lg ${selectedCategory === category ? 'font-bold' : 'font-normal'}`}
                                         onClick={() => handleCategoryChange(category)}
@@ -144,7 +146,7 @@ const Dashboard = () => {
                         </div>
                     </li>
                 </ul>
-            </aside>
+            </div>
 
             {/* Main Content */}
             <main className="flex-1 p-6">
@@ -153,19 +155,21 @@ const Dashboard = () => {
                     return (
                         <div key={category} className="mb-8">
                             <h2 className="text-2xl font-bold mb-4">{category}</h2>
-                            <div className="flex overflow-x-scroll space-x-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {categoryProducts.map(product => (
-                                    <div key={product.id} className="flex-none w-1/2 p-2">
-                                        <Image
-                                            src={product.image_url}
-                                            alt={product.product_name}
-                                            width={200}
-                                            height={200}
-                                            className="object-contain"
-                                        />
-                                        <h3 className="text-lg font-semibold mt-2">{product.product_name}</h3>
-                                        <p className="text-xl font-bold text-customGreen mt-1">${product.price.toLocaleString()}</p>
-                                    </div>
+                                    <Link key={product.id} href={`/product/${product.id}`} legacyBehavior>
+                                        <a className="block p-2 border rounded-lg shadow hover:bg-gray-100">
+                                            <Image
+                                                src={product.image_url}
+                                                alt={product.product_name}
+                                                width={200}
+                                                height={200}
+                                                className="object-contain rounded"
+                                            />
+                                            <h3 className="text-lg font-semibold mt-2">{product.product_name}</h3>
+                                            <p className="text-xl font-bold text-customGreen mt-1">${product.price.toLocaleString()}</p>
+                                        </a>
+                                    </Link>
                                 ))}
                             </div>
                         </div>
@@ -177,4 +181,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
