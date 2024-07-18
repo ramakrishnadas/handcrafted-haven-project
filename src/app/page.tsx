@@ -4,19 +4,6 @@ import Image from "next/image";
 export default function Page() {
   return (
     <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-center justify-center rounded-lg bg-customGreen p-4 md:h-52">
-        {/* Insert logo here */}
-        <Image
-          src="/logo.png"
-          alt="Handcrafted Haven Logo"
-          width={150}
-          height={150}
-          className="object-contain"
-        />
-        <h1 className="text-2xl md:text-5xl font-bold text-center text-white mt-4 mb-2">
-          Handcrafted Haven
-        </h1>
-      </div>
       <div className="mt-4 flex grow flex-col gap-4">
         <div className="flex flex-col justify-center items-center gap-6 rounded-lg bg-gray-100 px-6 py-10 md:w-5/5 md:px-20">
           {/*<div
