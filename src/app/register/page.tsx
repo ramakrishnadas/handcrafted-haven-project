@@ -1,74 +1,38 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { createUser, State } from "../lib/actions";
+import { useFormState } from "react-dom";
 
 export default function RegisterPage() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState({ firstName: "", lastName: "", email: "", password: "" });
-
-    const validate = () => {
-        let valid = true;
-        const newErrors = { firstName: "", lastName: "", email: "", password: "" };
-
-        if (!firstName) {
-            newErrors.firstName = "First name is required";
-            valid = false;
-        }
-
-        if (!lastName) {
-            newErrors.lastName = "Last name is required";
-            valid = false;
-        }
-
-        if (!email) {
-            newErrors.email = "Email is required";
-            valid = false;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            newErrors.email = "Email is invalid";
-            valid = false;
-        }
-
-        if (!password) {
-            newErrors.password = "Password is required";
-            valid = false;
-        } else if (password.length < 6) {
-            newErrors.password = "Password must be at least 6 characters";
-            valid = false;
-        }
-
-        setErrors(newErrors);
-        return valid;
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (validate()) {
-            console.log({ firstName, lastName, email, password });
-            // Handle successful form submission
-        }
-    };
+    const initialState: State = { message: null, errors: {} };
+    const [state, formAction] = useFormState(createUser, initialState);
 
     return (
         <main className="flex min-h-screen items-center justify-center bg-gray-100 p-6">
             <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
                 <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">Register</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form action={formAction} className="space-y-4">
                     <div>
                         <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
                             First Name
                         </label>
                         <input
                             id="firstName"
+                            name="firstName"
                             type="text"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
+                            placeholder="Please enter your first name"
+                            aria-describedby="firstName-error"
                             className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         />
-                        {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>}
+                        <div id="firstName-error" aria-live="polite" aria-atomic="true">
+                            {state.errors?.firstName &&
+                                state.errors.firstName.map((error: string) => (
+                                <p className="mt-2 text-sm text-red-500" key={error}>
+                                    {error}
+                                </p>
+                            ))}
+                        </div>
                     </div>
                     <div>
                         <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
@@ -76,12 +40,20 @@ export default function RegisterPage() {
                         </label>
                         <input
                             id="lastName"
+                            name="lastName"
                             type="text"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
+                            placeholder="Please enter your last name"
+                            aria-describedby="lastName-error"
                             className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         />
-                        {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>}
+                        <div id="lastName-error" aria-live="polite" aria-atomic="true">
+                            {state.errors?.lastName &&
+                                state.errors.lastName.map((error: string) => (
+                                <p className="mt-2 text-sm text-red-500" key={error}>
+                                    {error}
+                                </p>
+                            ))}
+                        </div>
                     </div>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -89,12 +61,20 @@ export default function RegisterPage() {
                         </label>
                         <input
                             id="email"
+                            name="email"
                             type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Please enter your email"
+                            aria-describedby="email-error"
                             className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         />
-                        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+                        <div id="email-error" aria-live="polite" aria-atomic="true">
+                            {state.errors?.email &&
+                                state.errors.email.map((error: string) => (
+                                <p className="mt-2 text-sm text-red-500" key={error}>
+                                    {error}
+                                </p>
+                            ))}
+                        </div>
                     </div>
                     <div>
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700">
@@ -102,12 +82,20 @@ export default function RegisterPage() {
                         </label>
                         <input
                             id="password"
+                            name="password"
                             type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Please enter your password"
+                            aria-describedby="password-error"
                             className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         />
-                        {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password}</p>}
+                        <div id="password-error" aria-live="polite" aria-atomic="true">
+                            {state.errors?.password &&
+                                state.errors.password.map((error: string) => (
+                                <p className="mt-2 text-sm text-red-500" key={error}>
+                                    {error}
+                                </p>
+                            ))}
+                        </div>
                     </div>
                     <button
                         type="submit"
