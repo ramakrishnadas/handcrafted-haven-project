@@ -16,4 +16,5 @@ export type Products = {
   image_url: string;
   description: string;
   stock: number;
+  thumbnail_image_url: string;
 };

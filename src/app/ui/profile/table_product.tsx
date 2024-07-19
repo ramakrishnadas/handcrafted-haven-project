@@ -1,5 +1,6 @@
 import { fetchFilteredProductsByUser } from "@/app/lib/data";
 import Image from 'next/image';
+import { ProductEditButton } from '@/app/ui/profile/button';
 
 export default async function ProductTable({
     userId
@@ -8,7 +9,7 @@ export default async function ProductTable({
 }) {
 
     const products = await fetchFilteredProductsByUser(userId);
-    console.log(products);
+    
     return(
         <ul className="border-2 bg-customGreen rounded-md m-4">
             <h1 className="text-center m-0.5">My Products</h1>
@@ -33,7 +34,7 @@ export default async function ProductTable({
                             <p className="m-2">Stock: {product.stock}</p>
                         </div>
                         <div className="flex-auto" >
-                            <button className="m-3 bg-customGreen rounded-md p-1 w-24">Edit</button>
+                            <ProductEditButton productId={product.id}/>
                             <button className="m-3 bg-customGreen rounded-md p-1 w-24">Delete</button>
                         </div>
             </li> 

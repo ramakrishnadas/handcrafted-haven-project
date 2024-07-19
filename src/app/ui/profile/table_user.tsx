@@ -1,16 +1,20 @@
-import { fetchFilteredUserDetails, UpdateUserDetails } from "@/app/lib/data";
+
+
+import { fetchFilteredUserDetails } from "@/app/lib/data";
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
+import { ProfileEditButton } from '@/app/ui/profile/button';
 
 export default async function UserTable({
     userId
 }: {
     userId: string;
 }) {
-    //const update = await UpdateUserDetails(userId);
     const users = await fetchFilteredUserDetails(userId);
-    
+
     //console.log("this is the update", update);
-    console.log(users);
+    
     return(
         <div className="flex sm:flex-row flex-col items-center m-4 bg-customGreen rounded-md text-white">
             <div className="m-2">
@@ -27,7 +31,7 @@ export default async function UserTable({
                 <h4 className="m-3">Name: {users.name}</h4>
                 <h4 className="m-3">Email: {users.email}</h4>
                 <h4 className="m-3">User story: {users.user_story}</h4>
-                <button className="m-3 bg-customGreen rounded-md p-1 w-1/6">Edit</button>
+                <ProfileEditButton userId={userId}/>
             </div>
             
         </div>

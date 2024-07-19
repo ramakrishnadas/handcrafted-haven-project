@@ -18,7 +18,7 @@ const apiRoute = nextConnect({
     res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
   },
 });
-
+//@ts-ignore
 apiRoute.use(upload.single('file'));
 
 apiRoute.post(async (req: ExtendedRequest, res: NextApiResponse) => {
@@ -26,6 +26,7 @@ apiRoute.post(async (req: ExtendedRequest, res: NextApiResponse) => {
     const result = await cloudinary.uploader.upload(req.file.path);
     res.status(200).json({ url: result.secure_url });
   } catch (error) {
+    //@ts-ignore
     res.status(500).json({ error: error.message });
   }
 });
