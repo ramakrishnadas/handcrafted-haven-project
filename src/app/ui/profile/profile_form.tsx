@@ -3,23 +3,22 @@
 import { useState, ChangeEvent } from "react";
 import axios from "axios";
 import NextImage from "next/image";
-import {User} from '@/app/lib/definitions'
-import {State2, updateUser} from '@/app/lib/actions'
+import { User } from "@/app/lib/definitions";
+import { State2, updateUser } from "@/app/lib/actions";
 import { useFormState } from "react-dom";
 
-export default function ProfileForm({
-  userData
-}: {
-  userData: User;
-}) {
-
+export default function ProfileForm({ userData }: { userData: User }) {
   const initialState: State2 = { message: null, errors: {} };
   const updateProfileWithId = updateUser.bind(null, userData.id);
   const [state, formAction] = useFormState(updateProfileWithId, initialState);
 
+  let firstImage = userData.profile_image;
+  if (!firstImage.startsWith("https")) {
+    firstImage = "/placeholder_profile.png";
+  }
 
   const [file, setFile] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>(`${firstImage}`);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -66,7 +65,6 @@ export default function ProfileForm({
       const formData = new FormData();
       formData.append("file", resizedImage, file.name);
 
-
       const res = await axios.post(
         "http://localhost:3000/api/route",
         formData,
@@ -76,9 +74,8 @@ export default function ProfileForm({
           },
         }
       );
-      
+
       setImageUrl(res.data.url);
-      
     } catch (error) {
       console.error("Error uploading the image", error);
     }
@@ -90,20 +87,43 @@ export default function ProfileForm({
         <fieldset>
           <input type="file" onChange={handleFileChange} />
           <button onClick={handleUpload}>Upload</button>
-          {imageUrl && <NextImage src={imageUrl} width={300} height={400} alt="Uploaded Image" />}
+          {imageUrl && (
+            <NextImage
+              src={imageUrl}
+              width={300}
+              height={400}
+              alt="Uploaded Image"
+            />
+          )}
         </fieldset>
 
         <fieldset>
-          <input id="userName" name="userName" type="text" defaultValue={userData.name}/>
-          <label>Password<input name="userPassword" type="password" required/></label>
-          <input name="userEmail" type="email" defaultValue={userData.email}/>
-          <input name="userStory" type="area" defaultValue={userData.user_story}/>
-          <input type="hidden" id="invisibleInput" name="userProfile" value={imageUrl}/>
+          <input
+            id="userName"
+            name="userName"
+            type="text"
+            defaultValue={userData.name}
+          />
+          <label>
+            Password
+            <input name="userPassword" type="password" required />
+          </label>
+          <input name="userEmail" type="email" defaultValue={userData.email} />
+          <input
+            name="userStory"
+            type="area"
+            defaultValue={userData.user_story}
+          />
+          <input
+            type="hidden"
+            id="invisibleInput"
+            name="userProfile"
+            value={imageUrl}
+          />
         </fieldset>
 
         <button type="submit">Edit User</button>
       </form>
-      
     </div>
-  ); 
+  );
 }

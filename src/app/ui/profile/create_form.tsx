@@ -3,31 +3,23 @@
 import { useState, ChangeEvent } from "react";
 import axios from "axios";
 import NextImage from "next/image";
-import { Products } from "@/app/lib/definitions";
-import { State3, updateProduct } from "@/app/lib/actions";
+import { State3, createProduct } from "@/app/lib/actions";
 import { useFormState } from "react-dom";
+import { useSearchParams } from "next/navigation";
 
-export default function ProductForm({
-  productData,
-}: {
-  productData: Products;
-}) {
+export default function CreateForm() {
+  const searchParams = useSearchParams();
+  const userId = searchParams?.get("userId") || "";
+
   const initialState: State3 = { message: null, errors: {} };
-  const updateProductWithId = updateProduct.bind(null, productData.id);
-  const [state, formAction] = useFormState(updateProductWithId, initialState);
-
-  let firstImage = productData.thumbnail_image_url;
-  if (!firstImage.startsWith("https")) {
-    if (firstImage == null || firstImage == "") {
-      firstImage = "/bob_profile.jpg";
-    } else {
-      firstImage = `/${firstImage}`;
-    }
-  }
+  const createProductWithId = createProduct.bind(null, userId);
+  const [state, formAction] = useFormState(createProductWithId, initialState);
 
   const [file, setFile] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string>(`${firstImage}`);
-  const [imageUrl2, setImageUrl2] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("/placeholder_product.jpg");
+  const [imageUrl2, setImageUrl2] = useState<string>(
+    "/placeholder_product.jpg"
+  );
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -107,6 +99,26 @@ export default function ProductForm({
     <div>
       <form action={formAction}>
         <fieldset>
+          <label>Name:</label>
+          <input name="productName" type="text" required />
+
+          <label>Category:</label>
+          <input name="category" type="text" required />
+
+          <label>Price:</label>
+          <input name="price" type="number" required />
+
+          <input type="hidden" name="product_image" value={imageUrl} />
+          <input type="hidden" name="product_image_small" value={imageUrl2} />
+
+          <label>Description:</label>
+          <textarea name="description" required></textarea>
+
+          <label>Stock:</label>
+          <input name="stock" type="number" required />
+        </fieldset>
+
+        <fieldset>
           <input type="file" onChange={handleFileChange} />
           <button onClick={handleUpload}>Upload</button>
           {imageUrl && (
@@ -119,39 +131,7 @@ export default function ProductForm({
           )}
         </fieldset>
 
-        <fieldset>
-          <input
-            name="productName"
-            type="text"
-            defaultValue={productData.product_name}
-          />
-          <input
-            name="category"
-            type="text"
-            defaultValue={productData.category}
-          />
-          <input name="price" type="number" defaultValue={productData.price} />
-          <input
-            type="hidden"
-            id="invisibleInput"
-            name="product_image"
-            value={imageUrl}
-          />
-          <input
-            type="hidden"
-            id="invisibleInput"
-            name="product_image_small"
-            value={imageUrl2}
-          />
-          <input
-            name="description"
-            type="text"
-            defaultValue={productData.description}
-          />
-          <input name="stock" type="number" defaultValue={productData.stock} />
-        </fieldset>
-
-        <button type="submit">Edit Product</button>
+        <button type="submit">Create Product</button>
       </form>
     </div>
   );
