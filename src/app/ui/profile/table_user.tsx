@@ -10,9 +10,11 @@ export default async function UserTable({ userId }: { userId: string }) {
   //console.log("this is the update", update);
 
   let firstImage = users.profile_image;
-  if (!firstImage.startsWith("https")) {
-    firstImage = "/placeholder_profile.png";
-  }
+
+    if (firstImage == null || firstImage == "" || firstImage == "/placeholder_profile.png" || !firstImage.startsWith("https")) {
+      firstImage = "/placeholder_profile.png";
+    }
+  
   return (
     <div className="container mx-auto p-8">
   <div className="flex flex-col sm:flex-row items-center bg-white rounded-lg shadow-md text-gray-900 p-6 mb-8">

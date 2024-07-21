@@ -17,12 +17,8 @@ export default function ProductForm({
   const [state, formAction] = useFormState(updateProductWithId, initialState);
 
   let firstImage = productData.thumbnail_image_url;
-  if (!firstImage.startsWith("https")) {
-    if (firstImage == null || firstImage == "" || firstImage == "/placeholder_product.jpg") {
-      firstImage = "/placeholder_product.jpg";
-    } else {
-      firstImage = `/${firstImage}`;
-    }
+  if (firstImage == null || firstImage == "" || firstImage == "/placeholder_product.jpg" || !firstImage.startsWith("https")) {
+    firstImage = "/placeholder_product.jpg";
   }
 
   const [file, setFile] = useState<File | null>(null);
