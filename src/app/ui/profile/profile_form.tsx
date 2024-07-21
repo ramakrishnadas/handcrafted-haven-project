@@ -83,12 +83,18 @@ export default function ProfileForm({ userData }: { userData: User }) {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <h1 className="text-lg m-4">Edit profile</h1>
-      <form action={formAction} className="max-w-md w-full bg-white shadow-md rounded-lg p-8 space-y-6">
+      <h1 className="text-lg m-4">Edit Profile</h1>
+      <form
+        action={formAction}
+        className="max-w-md w-full bg-white shadow-md rounded-lg p-8 space-y-6"
+      >
         <fieldset className="space-y-4">
           <div>
-            <label htmlFor="fileUpload" className="block text-sm font-medium text-gray-700">
-            Modify Image  (Recomended Sizes: 500x500 px)
+            <label
+              htmlFor="fileUpload"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Modify Image (Recomended Sizes: 500x500 px)
             </label>
             <input
               id="fileUpload"
@@ -121,7 +127,10 @@ export default function ProfileForm({ userData }: { userData: User }) {
 
         <fieldset className="space-y-4">
           <div>
-            <label htmlFor="userName" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="userName"
+              className="block text-sm font-medium text-gray-700"
+            >
               Username
             </label>
             <input
@@ -133,7 +142,10 @@ export default function ProfileForm({ userData }: { userData: User }) {
             />
           </div>
           <div>
-            <label htmlFor="userPassword" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="userPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -145,7 +157,10 @@ export default function ProfileForm({ userData }: { userData: User }) {
             />
           </div>
           <div>
-            <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="userEmail"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <input
@@ -157,7 +172,10 @@ export default function ProfileForm({ userData }: { userData: User }) {
             />
           </div>
           <div>
-            <label htmlFor="userStory" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="userStory"
+              className="block text-sm font-medium text-gray-700"
+            >
               Your Story
             </label>
             <textarea

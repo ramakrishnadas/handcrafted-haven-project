@@ -96,122 +96,146 @@ export default function CreateForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-  <form action={formAction} className="max-w-md w-full bg-white shadow-md rounded-lg p-8 space-y-6">
-    <fieldset className="space-y-4">
-      <div>
-        <label htmlFor="productName" className="block text-sm font-medium text-gray-700">
-          Name
-        </label>
-        <input
-          id="productName"
-          name="productName"
-          type="text"
-          required
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-      <div>
-        <label htmlFor="category" className="block text-sm font-medium text-gray-700">
-          Category
-        </label>
-        <select
-          id="category"
-          name="category"
-          required
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        >
-          <option value="" disabled selected>Select a category</option>
-          <option value="Jewelry">Jewelry</option>
-          <option value="Home Decor">Home Decor</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Accessories">Accessories</option>
-          <option value="Toys">Toys</option>
-          <option value="Art">Art</option>
-          <option value="Stationery">Stationery</option>
-          <option value="Furniture">Furniture</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="price" className="block text-sm font-medium text-gray-700">
-          Price
-        </label>
-        <input
-          id="price"
-          name="price"
-          type="number"
-          required
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-      <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-          Description
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          required
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        ></textarea>
-      </div>
-      <div>
-        <label htmlFor="stock" className="block text-sm font-medium text-gray-700">
-          Stock
-        </label>
-        <input
-          id="stock"
-          name="stock"
-          type="number"
-          required
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-      <input type="hidden" name="product_image" value={imageUrl} />
-      <input type="hidden" name="product_image_small" value={imageUrl2} />
-    </fieldset>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <h1 className="text-lg m-4">Create Product</h1>
+      <form
+        action={formAction}
+        className="max-w-md w-full bg-white shadow-md rounded-lg p-8 space-y-6"
+      >
+        <fieldset className="space-y-4">
+          <div>
+            <label
+              htmlFor="productName"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Name
+            </label>
+            <input
+              id="productName"
+              name="productName"
+              type="text"
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="category"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Category
+            </label>
+            <select
+              id="category"
+              name="category"
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="" disabled selected>
+                Select a category
+              </option>
+              <option value="Jewelry">Jewelry</option>
+              <option value="Home Decor">Home Decor</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Toys">Toys</option>
+              <option value="Art">Art</option>
+              <option value="Stationery">Stationery</option>
+              <option value="Furniture">Furniture</option>
+            </select>
+          </div>
+          <div>
+            <label
+              htmlFor="price"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Price
+            </label>
+            <input
+              id="price"
+              name="price"
+              type="number"
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            ></textarea>
+          </div>
+          <div>
+            <label
+              htmlFor="stock"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Stock
+            </label>
+            <input
+              id="stock"
+              name="stock"
+              type="number"
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <input type="hidden" name="product_image" value={imageUrl} />
+          <input type="hidden" name="product_image_small" value={imageUrl2} />
+        </fieldset>
 
-    <fieldset className="space-y-4">
-      <div>
-        <label htmlFor="fileUpload" className="block text-sm font-medium text-gray-700">
-          Modify Image (Recommended Sizes: 800x533 px)
-        </label>
-        <input
-          id="fileUpload"
-          type="file"
-          onChange={handleFileChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-      <div>
+        <fieldset className="space-y-4">
+          <div>
+            <label
+              htmlFor="fileUpload"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Modify Image (Recommended Sizes: 800x533 px)
+            </label>
+            <input
+              id="fileUpload"
+              type="file"
+              onChange={handleFileChange}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={handleUpload}
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Preview Image
+            </button>
+          </div>
+          {imageUrl && (
+            <div className="mt-4">
+              <NextImage
+                src={imageUrl}
+                width={600}
+                height={400}
+                alt="Uploaded Image"
+                className="rounded-lg shadow-md"
+              />
+            </div>
+          )}
+        </fieldset>
+
         <button
-          type="button"
-          onClick={handleUpload}
+          type="submit"
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Preview Image
+          Create Product
         </button>
-      </div>
-      {imageUrl && (
-        <div className="mt-4">
-          <NextImage
-            src={imageUrl}
-            width={600}
-            height={400}
-            alt="Uploaded Image"
-            className="rounded-lg shadow-md"
-          />
-        </div>
-      )}
-    </fieldset>
-
-    <button
-      type="submit"
-      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-    >
-      Create Product
-    </button>
-  </form>
-</div>
+      </form>
+    </div>
   );
 }
