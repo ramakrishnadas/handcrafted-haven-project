@@ -165,6 +165,7 @@ export async function updateUser(
   }
 
   revalidatePath("/profile");
+  revalidatePath(`/profile/${id}/edit_profile`);
   redirect("/profile");
 }
 

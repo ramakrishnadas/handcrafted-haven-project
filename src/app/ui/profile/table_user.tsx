@@ -14,23 +14,29 @@ export default async function UserTable({ userId }: { userId: string }) {
     firstImage = "/placeholder_profile.png";
   }
   return (
-    <div className="flex sm:flex-row flex-col items-center m-4 bg-customGreen rounded-md text-white">
-      <div className="m-2">
-        <Image
-          src={`${firstImage}`}
-          className="rounded-md min-w-24"
-          width={150}
-          height={250}
-          alt={`${users.name}'s profile picture`}
-        />
+    <div className="container mx-auto p-8">
+  <div className="flex flex-col sm:flex-row items-center bg-white rounded-lg shadow-md text-gray-900 p-6 mb-8">
+    <div className="flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">
+      <Image
+        src={firstImage}
+        className="rounded-full border-4 border-gray-300 shadow-sm"
+        width={150}
+        height={150}
+        alt={`${users.name}'s profile picture`}
+      />
+    </div>
+    <div className="flex flex-col justify-between w-full sm:w-auto bg-white rounded-lg p-6">
+      <div>
+        <h4 className="text-xl font-bold mb-2">Name: <span className="font-normal">{users.name}</span></h4>
+        <h4 className="text-xl font-bold mb-2">Email: <span className="font-normal">{users.email}</span></h4>
+        <h4 className="text-xl font-bold mb-4">User story: <span className="font-normal">{users.user_story}</span></h4>
       </div>
-
-      <div className="m-3 text-white bg-gray-800 rounded-md w-full">
-        <h4 className="m-3">Name: {users.name}</h4>
-        <h4 className="m-3">Email: {users.email}</h4>
-        <h4 className="m-3">User story: {users.user_story}</h4>
+      <div className="flex space-x-2">
         <ProfileEditButton userId={userId} />
       </div>
     </div>
+  </div>
+</div>
+
   );
 }

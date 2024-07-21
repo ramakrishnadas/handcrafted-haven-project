@@ -62,11 +62,11 @@ export default function CreateForm() {
     if (!file) return;
 
     try {
-      const resizedImage = await resizeImage(file, 800, 600);
+      const resizedImage = await resizeImage(file, 800, 533);
       const formData = new FormData();
       formData.append("file", resizedImage, file.name);
 
-      const resizedImage2 = await resizeImage(file, 400, 300);
+      const resizedImage2 = await resizeImage(file, 600, 400);
       const formData2 = new FormData();
       formData2.append("file", resizedImage2, file.name);
 
@@ -96,43 +96,113 @@ export default function CreateForm() {
   };
 
   return (
-    <div>
-      <form action={formAction}>
-        <fieldset>
-          <label>Name:</label>
-          <input name="productName" type="text" required />
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <form action={formAction} className="max-w-md w-full bg-white shadow-md rounded-lg p-8 space-y-6">
+    <fieldset className="space-y-4">
+      <div>
+        <label htmlFor="productName" className="block text-sm font-medium text-gray-700">
+          Name
+        </label>
+        <input
+          id="productName"
+          name="productName"
+          type="text"
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+          Category
+        </label>
+        <input
+          id="category"
+          name="category"
+          type="text"
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+          Price
+        </label>
+        <input
+          id="price"
+          name="price"
+          type="number"
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          Description
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        ></textarea>
+      </div>
+      <div>
+        <label htmlFor="stock" className="block text-sm font-medium text-gray-700">
+          Stock
+        </label>
+        <input
+          id="stock"
+          name="stock"
+          type="number"
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <input type="hidden" name="product_image" value={imageUrl} />
+      <input type="hidden" name="product_image_small" value={imageUrl2} />
+    </fieldset>
 
-          <label>Category:</label>
-          <input name="category" type="text" required />
+    <fieldset className="space-y-4">
+      <div>
+        <label htmlFor="fileUpload" className="block text-sm font-medium text-gray-700">
+        Modify Image  (Recomended Sizes: 800x533 px)
+        </label>
+        <input
+          id="fileUpload"
+          type="file"
+          onChange={handleFileChange}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <button
+          type="button"
+          onClick={handleUpload}
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Preview Image
+        </button>
+      </div>
+      {imageUrl && (
+        <div className="mt-4">
+          <NextImage
+            src={imageUrl}
+            width={600}
+            height={400}
+            alt="Uploaded Image"
+            className="rounded-lg shadow-md"
+          />
+        </div>
+      )}
+    </fieldset>
 
-          <label>Price:</label>
-          <input name="price" type="number" required />
-
-          <input type="hidden" name="product_image" value={imageUrl} />
-          <input type="hidden" name="product_image_small" value={imageUrl2} />
-
-          <label>Description:</label>
-          <textarea name="description" required></textarea>
-
-          <label>Stock:</label>
-          <input name="stock" type="number" required />
-        </fieldset>
-
-        <fieldset>
-          <input type="file" onChange={handleFileChange} />
-          <button onClick={handleUpload}>Upload</button>
-          {imageUrl && (
-            <NextImage
-              src={imageUrl}
-              width={400}
-              height={300}
-              alt="Uploaded Image"
-            />
-          )}
-        </fieldset>
-
-        <button type="submit">Create Product</button>
-      </form>
-    </div>
+    <button
+      type="submit"
+      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+      Create Product
+    </button>
+  </form>
+</div>
   );
 }

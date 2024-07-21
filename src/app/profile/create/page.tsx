@@ -5,7 +5,6 @@ export default async function Page() {
   return (
     <Suspense>
       <div>
-        <h1>Upload an Image</h1>
         <CreateForm />
       </div>
     </Suspense>

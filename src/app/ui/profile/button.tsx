@@ -5,7 +5,7 @@ export function ProfileEditButton({ userId }: { userId: string }) {
   return (
     <Link
       href={`/profile/${userId}/edit_profile`}
-      className="m-3 bg-customGreen rounded-md p-1 w-1/6"
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     >
       {" "}
       EDIT
@@ -17,7 +17,7 @@ export function ProductEditButton({ productId }: { productId: string }) {
   return (
     <Link
       href={`/profile/${productId}/edit_product`}
-      className="m-3 bg-customGreen rounded-md p-1 w-1/6"
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     >
       {" "}
       EDIT{" "}
@@ -32,7 +32,7 @@ export function ProductCreateButton({ userId }: { userId: string }) {
         pathname: "/profile/create",
         query: { userId: userId },
       }}
-      className="m-3 bg-gray-800 rounded-md p-1 w-1/6 text-white"
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     >
       {" "}
       CREATE NEW PRODUCT{" "}
@@ -46,7 +46,7 @@ export function DeleteProductButton({ id }: { id: string }) {
     <form action={deleteProductWithId}>
       <button
         type="submit"
-        className="m-3 bg-gray-800 rounded-md p-1 w-1/6 text-white"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         {" "}
         DELETE{" "}

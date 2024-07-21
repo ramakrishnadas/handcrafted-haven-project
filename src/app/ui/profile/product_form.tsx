@@ -18,16 +18,16 @@ export default function ProductForm({
 
   let firstImage = productData.thumbnail_image_url;
   if (!firstImage.startsWith("https")) {
-    if (firstImage == null || firstImage == "") {
-      firstImage = "/bob_profile.jpg";
+    if (firstImage == null || firstImage == "" || firstImage == "/placeholder_product.jpg") {
+      firstImage = "/placeholder_product.jpg";
     } else {
       firstImage = `/${firstImage}`;
     }
   }
 
   const [file, setFile] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string>(`${firstImage}`);
-  const [imageUrl2, setImageUrl2] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>(productData.image_url);
+  const [imageUrl2, setImageUrl2] = useState<string>(`${firstImage}`);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -70,11 +70,11 @@ export default function ProductForm({
     if (!file) return;
 
     try {
-      const resizedImage = await resizeImage(file, 800, 600);
+      const resizedImage = await resizeImage(file, 800, 533);
       const formData = new FormData();
       formData.append("file", resizedImage, file.name);
 
-      const resizedImage2 = await resizeImage(file, 400, 300);
+      const resizedImage2 = await resizeImage(file, 600, 400);
       const formData2 = new FormData();
       formData2.append("file", resizedImage2, file.name);
 
@@ -104,55 +104,123 @@ export default function ProductForm({
   };
 
   return (
-    <div>
-      <form action={formAction}>
-        <fieldset>
-          <input type="file" onChange={handleFileChange} />
-          <button onClick={handleUpload}>Upload</button>
-          {imageUrl && (
-            <NextImage
-              src={imageUrl}
-              width={400}
-              height={300}
-              alt="Uploaded Image"
-            />
-          )}
-        </fieldset>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <form action={formAction} className="max-w-md w-full bg-white shadow-md rounded-lg p-8 space-y-6">
+    <fieldset className="space-y-4">
+      <div>
+        <label htmlFor="productName" className="block text-sm font-medium text-gray-700">
+          Product Name
+        </label>
+        <input
+          id="productName"
+          name="productName"
+          type="text"
+          defaultValue={productData.product_name}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+          Category
+        </label>
+        <input
+          id="category"
+          name="category"
+          type="text"
+          defaultValue={productData.category}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+          Price
+        </label>
+        <input
+          id="price"
+          name="price"
+          type="number"
+          defaultValue={productData.price}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          Description
+        </label>
+        <input
+          id="description"
+          name="description"
+          type="text"
+          defaultValue={productData.description}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label htmlFor="stock" className="block text-sm font-medium text-gray-700">
+          Stock
+        </label>
+        <input
+          id="stock"
+          name="stock"
+          type="number"
+          defaultValue={productData.stock}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <input
+        type="hidden"
+        id="invisibleInput"
+        name="product_image"
+        value={imageUrl}
+      />
+      <input
+        type="hidden"
+        id="invisibleInput"
+        name="product_image_small"
+        value={imageUrl2}
+      />
+    </fieldset>
+    <fieldset className="space-y-4">
+      <div>
+        <label htmlFor="fileUpload" className="block text-sm font-medium text-gray-700">
+        Modify Image  (Recomended Sizes: 800x533 px)
+        </label>
+        <input
+          id="fileUpload"
+          type="file"
+          onChange={handleFileChange}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <button
+          type="button"
+          onClick={handleUpload}
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Preview Image
+        </button>
+      </div>
+      {imageUrl2 && (
+        <div className="mt-4">
+          <NextImage
+            src={imageUrl2}
+            width={600}
+            height={400}
+            alt="Uploaded Image"
+            className="rounded-lg shadow-md"
+          />
+        </div>
+      )}
+    </fieldset>
 
-        <fieldset>
-          <input
-            name="productName"
-            type="text"
-            defaultValue={productData.product_name}
-          />
-          <input
-            name="category"
-            type="text"
-            defaultValue={productData.category}
-          />
-          <input name="price" type="number" defaultValue={productData.price} />
-          <input
-            type="hidden"
-            id="invisibleInput"
-            name="product_image"
-            value={imageUrl}
-          />
-          <input
-            type="hidden"
-            id="invisibleInput"
-            name="product_image_small"
-            value={imageUrl2}
-          />
-          <input
-            name="description"
-            type="text"
-            defaultValue={productData.description}
-          />
-          <input name="stock" type="number" defaultValue={productData.stock} />
-        </fieldset>
-
-        <button type="submit">Edit Product</button>
-      </form>
-    </div>
+    <button
+      type="submit"
+      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+      Apply Changes
+    </button>
+  </form>
+</div>
   );
 }

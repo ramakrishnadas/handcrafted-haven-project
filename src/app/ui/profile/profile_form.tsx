@@ -61,7 +61,7 @@ export default function ProfileForm({ userData }: { userData: User }) {
     if (!file) return;
 
     try {
-      const resizedImage = await resizeImage(file, 300, 400);
+      const resizedImage = await resizeImage(file, 500, 500);
       const formData = new FormData();
       formData.append("file", resizedImage, file.name);
 
@@ -82,38 +82,91 @@ export default function ProfileForm({ userData }: { userData: User }) {
   };
 
   return (
-    <div>
-      <form action={formAction}>
-        <fieldset>
-          <input type="file" onChange={handleFileChange} />
-          <button onClick={handleUpload}>Upload</button>
-          {imageUrl && (
-            <NextImage
-              src={imageUrl}
-              width={300}
-              height={400}
-              alt="Uploaded Image"
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <h1 className="text-lg m-4">Edit profile</h1>
+      <form action={formAction} className="max-w-md w-full bg-white shadow-md rounded-lg p-8 space-y-6">
+        <fieldset className="space-y-4">
+          <div>
+            <label htmlFor="fileUpload" className="block text-sm font-medium text-gray-700">
+            Modify Image  (Recomended Sizes: 500x500 px)
+            </label>
+            <input
+              id="fileUpload"
+              type="file"
+              onChange={handleFileChange}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={handleUpload}
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Preview Image
+            </button>
+          </div>
+          {imageUrl && (
+            <div className="mt-4">
+              <NextImage
+                src={imageUrl}
+                width={500}
+                height={500}
+                alt="Uploaded Image"
+                className="rounded-lg shadow-md"
+              />
+            </div>
           )}
         </fieldset>
 
-        <fieldset>
-          <input
-            id="userName"
-            name="userName"
-            type="text"
-            defaultValue={userData.name}
-          />
-          <label>
-            Password
-            <input name="userPassword" type="password" required />
-          </label>
-          <input name="userEmail" type="email" defaultValue={userData.email} />
-          <input
-            name="userStory"
-            type="area"
-            defaultValue={userData.user_story}
-          />
+        <fieldset className="space-y-4">
+          <div>
+            <label htmlFor="userName" className="block text-sm font-medium text-gray-700">
+              Username
+            </label>
+            <input
+              id="userName"
+              name="userName"
+              type="text"
+              defaultValue={userData.name}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label htmlFor="userPassword" className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <input
+              id="userPassword"
+              name="userPassword"
+              type="password"
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              id="userEmail"
+              name="userEmail"
+              type="email"
+              defaultValue={userData.email}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label htmlFor="userStory" className="block text-sm font-medium text-gray-700">
+              Your Story
+            </label>
+            <textarea
+              id="userStory"
+              name="userStory"
+              defaultValue={userData.user_story}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
           <input
             type="hidden"
             id="invisibleInput"
@@ -122,7 +175,12 @@ export default function ProfileForm({ userData }: { userData: User }) {
           />
         </fieldset>
 
-        <button type="submit">Edit User</button>
+        <button
+          type="submit"
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Apply Changes
+        </button>
       </form>
     </div>
   );

@@ -45,12 +45,14 @@ export async function fetchFilteredUserDetails(
     userId: string,
   ) {
     try {
+
       const data = await sql<Products>`
         SELECT products.id, products.user_id, products.product_name, products.category, products.price, products.image_url, products.description, products.stock, products.thumbnail_image_url
         FROM users
         JOIN products ON users.id = products.user_id
         WHERE 
-        users.id=${userId}`;
+        users.id=${userId}
+        ORDER BY products.id`;
   
       //const latestInvoices = data.rows.map((invoice) => ({
         //...invoice,
@@ -94,7 +96,7 @@ export async function fetchFilteredUserDetails(
         WHERE
           products.id=${productId}
       `;
-      
+
       return productDetails.rows[0];
       
     } catch (error) {
