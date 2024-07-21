@@ -115,13 +115,22 @@ export default function CreateForm() {
         <label htmlFor="category" className="block text-sm font-medium text-gray-700">
           Category
         </label>
-        <input
+        <select
           id="category"
           name="category"
-          type="text"
           required
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
+        >
+          <option value="" disabled selected>Select a category</option>
+          <option value="Jewelry">Jewelry</option>
+          <option value="Home Decor">Home Decor</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Toys">Toys</option>
+          <option value="Art">Art</option>
+          <option value="Stationery">Stationery</option>
+          <option value="Furniture">Furniture</option>
+        </select>
       </div>
       <div>
         <label htmlFor="price" className="block text-sm font-medium text-gray-700">
@@ -165,7 +174,7 @@ export default function CreateForm() {
     <fieldset className="space-y-4">
       <div>
         <label htmlFor="fileUpload" className="block text-sm font-medium text-gray-700">
-        Modify Image  (Recomended Sizes: 800x533 px)
+          Modify Image (Recommended Sizes: 800x533 px)
         </label>
         <input
           id="fileUpload"
