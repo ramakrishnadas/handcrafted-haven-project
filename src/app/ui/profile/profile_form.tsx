@@ -66,7 +66,7 @@ export default function ProfileForm({ userData }: { userData: User }) {
       formData.append("file", resizedImage, file.name);
 
       const res = await axios.post(
-        "http://localhost:3000/api/route",
+        `${process.env.URL}/api/route`,
         formData,
         {
           headers: {

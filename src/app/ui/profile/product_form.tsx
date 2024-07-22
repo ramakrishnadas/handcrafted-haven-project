@@ -80,7 +80,7 @@ export default function ProductForm({
       formData2.append("file", resizedImage2, file.name);
 
       const res = await axios.post(
-        "http://localhost:3000/api/route",
+        `${process.env.URL}/api/route`,
         formData,
         {
           headers: {
@@ -89,7 +89,7 @@ export default function ProductForm({
         }
       );
       const res2 = await axios.post(
-        "http://localhost:3000/api/route",
+        `${process.env.URL}/api/route`,
         formData2,
         {
           headers: {
