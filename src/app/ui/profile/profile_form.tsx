@@ -66,7 +66,7 @@ export default function ProfileForm({ userData }: { userData: User }) {
       formData.append("file", resizedImage, file.name);
 
       const res = await axios.post(
-        `${process.env.URL}/api/route`,
+        "https://handcrafted-haven-project.vercel.app/api/route",
         formData,
         {
           headers: {
