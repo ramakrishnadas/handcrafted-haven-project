@@ -6,40 +6,40 @@ import { useFormState } from "react-dom";
 import { authenticate } from "../lib/actions";
 
 export default function LoginPage() {
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [errors, setErrors] = useState({ email: "", password: "" });
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState({ email: "", password: "" });
 
-    // const validate = () => {
-    //     let valid = true;
-    //     const newErrors = { email: "", password: "" };
+    const validate = () => {
+        let valid = true;
+        const newErrors = { email: "", password: "" };
 
-    //     if (!email) {
-    //         newErrors.email = "Email is required";
-    //         valid = false;
-    //     } else if (!/\S+@\S+\.\S+/.test(email)) {
-    //         newErrors.email = "Email is invalid";
-    //         valid = false;
-    //     }
+        if (!email) {
+            newErrors.email = "Email is required";
+            valid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            newErrors.email = "Email is invalid";
+            valid = false;
+        }
 
-    //     if (!password) {
-    //         newErrors.password = "Password is required";
-    //         valid = false;
-    //     } else if (password.length < 6) {
-    //         newErrors.password = "Password must be at least 6 characters";
-    //         valid = false;
-    //     }
+        if (!password) {
+            newErrors.password = "Password is required";
+            valid = false;
+        } else if (password.length < 6) {
+            newErrors.password = "Password must be at least 6 characters";
+            valid = false;
+        }
 
-    //     setErrors(newErrors);
-    //     return valid;
-    // };
+        setErrors(newErrors);
+        return valid;
+    };
 
-    // const handleSubmit = (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     if (validate()) {
-    //         console.log({ email, password });
-    //     }
-    // };
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (validate()) {
+            console.log({ email, password });
+        }
+    };
 
     const [errorMessage, formAction, isPending] = useFormState(
         authenticate,

@@ -27,7 +27,7 @@ const fetchProductById = async (id: number): Promise<Product | null> => {
 };
 
 const ProductPage = () => {
-    const { id } = useParams();
+    const  id = useParams();
     const [product, setProduct] = useState<Product | null>(null);
 
     useEffect(() => {
