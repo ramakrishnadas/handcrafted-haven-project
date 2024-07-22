@@ -7,9 +7,12 @@ import { useParams } from 'next/navigation';
 export default function ProductPage() {
     const params = useParams();
 
-    const id = params.id.toString();
+    if (params) {
+        const id = params.id.toString();
 
-    return (
-        <ProductDetails id={id} />
-    );
+        return (
+            <ProductDetails id={id} />
+        );
+    }
+    
 };
