@@ -21,4 +21,5 @@ export type Product = {
 
 export type Category = {
   category: string;
-}
+};
+
