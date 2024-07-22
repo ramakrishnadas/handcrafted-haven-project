@@ -1,6 +1,6 @@
 import { getProducts, getCategories, getFilteredProducts } from "@/app/lib/data";
 import { Product, Category } from "@/app/lib/definitions";
-import ProductList from "../ui/dashboard/ProductList";
+import ProductList from "../ui/dashboard/productList";
 
 const fetchCategories = async (): Promise<Category[]> => {
   return await getCategories();
