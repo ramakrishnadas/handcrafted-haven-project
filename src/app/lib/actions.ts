@@ -1,6 +1,6 @@
-"use server";
-
-import { signIn } from "../../../auth";
+'use server';
+ 
+import { signIn, signOut } from "../../../auth";
 import { AuthError } from "next-auth";
 import { z } from "zod";
 import bcrypt from "bcrypt";
@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+
 
 // Define the user schema using zod
 const UserSchema = z.object({
@@ -110,6 +111,10 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+export async function logOut() {
+  await signOut();
 }
 
 export type State2 = {
