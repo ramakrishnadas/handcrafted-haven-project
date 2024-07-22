@@ -1,13 +1,13 @@
 export type User = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  profile_image: string;
-  user_story: string;
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+    profile_image: string;
+    user_story: string;
 };
 
-export type Product = {
+export type Products = {
   id: string;
   user_id: string;
   product_name: string;
@@ -18,8 +18,3 @@ export type Product = {
   stock: number;
   thumbnail_image_url: string;
 };
-
-export type Category = {
-  category: string;
-};
-
