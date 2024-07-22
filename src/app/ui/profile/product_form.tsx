@@ -3,14 +3,14 @@
 import { useState, ChangeEvent } from "react";
 import axios from "axios";
 import NextImage from "next/image";
-import { Products } from "@/app/lib/definitions";
+import { Product } from "@/app/lib/definitions";
 import { State3, updateProduct } from "@/app/lib/actions";
 import { useFormState } from "react-dom";
 
 export default function ProductForm({
   productData,
 }: {
-  productData: Products;
+  productData: Product;
 }) {
   const initialState: State3 = { message: null, errors: {} };
   const updateProductWithId = updateProduct.bind(null, productData.id);

@@ -7,7 +7,7 @@ export type User = {
     user_story: string;
 };
 
-export type Products = {
+export type Product = {
   id: string;
   user_id: string;
   product_name: string;
@@ -18,3 +18,7 @@ export type Products = {
   stock: number;
   thumbnail_image_url: string;
 };
+
+export type Category = {
+  category: string;
+}
