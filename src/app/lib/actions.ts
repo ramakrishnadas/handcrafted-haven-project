@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { auth, signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { z } from "zod";
 import bcrypt from "bcrypt";
@@ -299,4 +299,73 @@ export async function deleteProduct(id: string) {
   } catch (error) {
     return { message: "Database Error: Failed to Delete Invoice." };
   }
+}
+
+// Define the Review and Rating schema using zod
+const ReviewAndRatingSchema = z.object({
+  user_id: z.string(),
+  product_id: z.string(),
+  review: z.string().min(1, "Review is required."),
+  rating: z.number().min(1, "Rating is required."),
+});
+
+const CreateReviewAndRating = ReviewAndRatingSchema.omit({ user_id: true });
+
+export type State4 = {
+  errors?: {
+    product_id?: string[];
+    review?: string[];
+    rating?: string[];
+  };
+  message?: string | null;
+};
+
+
+export async function createReviewAndRating(prevState: State4, formData: FormData) {
+  const validatedFields = CreateReviewAndRating.safeParse({
+    product_id: formData.get("product_id"),
+    review: formData.get("review"),
+    rating: Number(formData.get("rating")),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Invalid Fields. Failed to Create Review and Rating.",
+    };
+  }
+
+  const { product_id, review, rating } = validatedFields.data;
+
+  const session = await auth();
+
+  const user_id = session?.user?.id;
+
+  // Check if user has already left review for this product
+  let existingReview;
+  try {
+    existingReview = await sql`SELECT * FROM reviews_and_ratings WHERE product_id = ${product_id} AND user_id = ${user_id}`;
+  } catch (error) {
+    return { message: "Database Error: Already submitted a review." };
+  }
+
+  if (existingReview.rows.length > 0) {
+    return {
+      errors: { review: ["Review from this user for this product already exists."] },
+      message: "Review already exists. Failed to Create Review and Rating.",
+    };
+  }
+
+  try {
+    await sql`
+      INSERT INTO reviews_and_ratings (user_id, product_id, review, rating)
+      VALUES (${user_id}, ${product_id}, ${review}, ${rating})
+    `;
+  } catch (error) {
+    return { message: "Database Error: Failed to Create Review and Rating." };
+  }
+
+  revalidatePath(`/product/${product_id}`);
+  redirect(`/product/${product_id}`);
+  
 }

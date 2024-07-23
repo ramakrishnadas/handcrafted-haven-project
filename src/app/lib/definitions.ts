@@ -22,3 +22,12 @@ export type Product = {
 export type Category = {
   category: string;
 }
+
+export type ReviewAndRating = {
+  user_id: string;
+  product_id: string;
+  review: string;
+  rating: number;
+  user_name: string;
+  user_profile_image: string;
+}

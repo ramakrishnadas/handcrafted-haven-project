@@ -6,7 +6,7 @@ export default async function ProductDetails({ id }: { id: string }) {
     const product = await getProductById(id);
 
     return (
-        <div className="flex justify-center items-center min-h-screen p-6">
+        <div className="flex justify-center items-center p-6 my-20">
             <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-6 max-w-4xl">
                 <div className="w-full md:w-auto md:flex-shrink-0">
                     <Image
