@@ -13,6 +13,7 @@ export default async function Header() {
       <Link
         href={"/dashboard"}
         className="flex h-20 shrink-0 items-center justify-center rounded-lg bg-customGreen p-4 md:h-52"
+        shallow={true}
       >
         <Image
           src="/logo.png"

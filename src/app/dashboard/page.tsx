@@ -1,7 +1,6 @@
 import { getProducts, getCategories, getFilteredProducts } from "@/app/lib/data";
 import { Product, Category } from "@/app/lib/definitions";
 import ProductList from "../ui/dashboard/productList";
-import { auth } from "../../auth";
 
 const fetchCategories = async (): Promise<Category[]> => {
   return await getCategories();
@@ -24,10 +23,6 @@ export default async function Dashboard({
   const categories = categoryData[0].map((item) => item.category);
 
   const productData = await Promise.all([fetchProducts()]);
-
-  // Get session
-  const session = await auth();
-  console.log(session);
 
 	let products;
 	if (query) {

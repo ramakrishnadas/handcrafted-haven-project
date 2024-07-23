@@ -1,6 +1,7 @@
 import { revalidatePath } from 'next/cache';
-import { User, Product, Category } from './definitions';
+import { User, Product, Category, ReviewAndRating } from './definitions';
 import { sql } from '@vercel/postgres';
+import { Red_Rose } from 'next/font/google';
 
 
 export async function fetchFilteredUserDetails(
@@ -181,5 +182,24 @@ export async function getProductById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');
+  }
+}
+
+export async function getReviewsAndRatingsByProduct(
+  productId: string,
+) {
+  try {
+
+    const data = await sql<ReviewAndRating>`
+      SELECT rr.user_id, rr.product_id, rr.review, rr.rating, u.name as user_name, u.profile_image as user_profile_image
+      FROM reviews_and_ratings rr
+      JOIN users u 
+      ON u.id = rr.user_id
+      WHERE rr.product_id = ${productId}
+    `
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the reviews and ratings by product.');
   }
 }
