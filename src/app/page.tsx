@@ -1,24 +1,43 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Page() {
+  const [backgroundImage, setBackgroundImage] = useState("/images/wall.jpg");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 600) {
+        setBackgroundImage("/images/wall.jpg");
+      } else {
+        setBackgroundImage("/images/wall-big.jpg");
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <main className="flex min-h-screen flex-col p-6">
       <div className="mt-4 flex grow flex-col gap-4">
-        <div className="flex flex-col justify-center items-center gap-6 rounded-lg bg-gray-100 px-6 py-10 md:w-5/5 md:px-20">
-          {/*<div
-          className="h-0 w-0 border-b-[30px] border-l-[20px] border-r-[20px] border-b-black border-l-transparent border-r-transparent"
-        />*/}
-          <p
-            className={` antialiased text-xl text-gray-800 md:text-3xl md:leading-normal`}
-          >
+        <div className="relative flex flex-col justify-center items-center gap-6 rounded-lg px-6 py-10 md:w-5/5 md:px-20 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${backgroundImage})` }}>
+          <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
+          <p className="relative z-10 antialiased text-xl text-white md:text-3xl md:leading-normal">
             Are you looking for a place to buy or sell exquisite handcrafted
             products? <br />
             <strong>You&apos;ve found the perfect destination</strong>
           </p>
           <Link
             href="/login"
-            className="flex justify-center items-center gap-5 self-start md:self-center md:w- rounded-lg bg-customGreen px-10 py-4 text-sm font-medium text-white transition-colors hover:bg-green-400 md:text-2xl"
+            className="relative z-10 flex justify-center items-center gap-5 self-start md:self-center md:w- rounded-lg bg-customGreen px-10 py-4 text-sm font-medium text-white transition-colors hover:bg-green-400 md:text-2xl"
           >
             <span>Log in</span>
           </Link>
@@ -32,9 +51,7 @@ export default function Page() {
             className="hidden md:block"
             alt=""
           />*/}
-          <p
-            className={` antialiased text-xl text-gray-800 md:text-3xl md:leading-normal`}
-          >
+          <p className={` antialiased text-xl text-gray-800 md:text-3xl md:leading-normal`}>
             At Handcrafted Haven, we celebrate the unique value of handmade
             goods.
             <br />
