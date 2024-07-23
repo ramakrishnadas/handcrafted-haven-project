@@ -4,7 +4,6 @@ import "@/app/ui/global.css";
 import Header from "./ui/header";
 import { ReactNode } from "react";
 import AuthWrapper from "@/auth_wrapper";
-import { auth } from "../auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,10 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 //   description: "Handcrafted Haven is an innovative web application that aims to provide a platform for artisans and crafters to showcase and sell their unique handcrafted items.",
 // };
 
-export default async function LayoutContent({ children }: { children: ReactNode}) {
-
-  const session = await auth();
-  console.log(session?.user)
+export default function LayoutContent({ children }: { children: ReactNode}) {
 
   return (
       <html lang="en">
