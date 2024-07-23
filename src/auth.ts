@@ -64,20 +64,23 @@ export const {
       return true;
     },
 		authorized({ auth, request : { nextUrl } }) {
-      const isLoggedIn =!!auth?.user;
+      const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+      const isOnProfile = nextUrl.pathname.startsWith('/profile/');
+      const isOnProduct = nextUrl.pathname.startsWith('/product/');
 
-      if (isOnDashboard) {
-        if (isLoggedIn) {
-          return true;
+      if (!isLoggedIn) {
+        if (isOnDashboard || isOnProfile || isOnProduct) {
+          return false;
         }
-        return false;
-      } else if (isLoggedIn) {
-        return NextResponse.redirect(new URL('/dashboard', nextUrl));
+        return true;
       }
 
-      return true;
-      
+      if (isOnDashboard || isOnProfile || isOnProduct) {
+        return true;
+      }
+
+      return NextResponse.redirect(new URL('/dashboard', nextUrl));
     },
   },
 });
