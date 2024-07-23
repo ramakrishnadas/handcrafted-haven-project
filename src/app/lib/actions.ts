@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn, signOut } from "../../../auth";
+import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { z } from "zod";
 import bcrypt from "bcrypt";
@@ -98,7 +98,7 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-    await signIn("credentials", formData);
+    await signIn("credentials", formData, { redirectTo: "/dashboard"});
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -110,10 +110,6 @@ export async function authenticate(
     }
     throw error;
   }
-}
-
-export async function logOut() {
-  await signOut();
 }
 
 export type State2 = {

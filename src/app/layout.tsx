@@ -1,18 +1,12 @@
-"use client";
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Image from "next/image";
 import "@/app/ui/global.css";
 import Header from "./ui/header";
-import { getSession, SessionProvider, useSession } from "next-auth/react";
 import { ReactNode } from "react";
+import AuthWrapper from "@/auth_wrapper";
+import { auth } from "../auth";
 
 const inter = Inter({ subsets: ["latin"] });
-
-interface RootLayoutProps {
-  children: ReactNode;
-}
 
 // export const metadata: Metadata = {
 //   title: {
@@ -22,26 +16,20 @@ interface RootLayoutProps {
 //   description: "Handcrafted Haven is an innovative web application that aims to provide a platform for artisans and crafters to showcase and sell their unique handcrafted items.",
 // };
 
-function LayoutContent({ children }: { children: ReactNode}) {
-  const { data: session, status } = useSession();
+export default async function LayoutContent({ children }: { children: ReactNode}) {
 
-  // console.log(`This is my session: ${session}`)
+  const session = await auth();
+  console.log(session?.user)
+
   return (
       <html lang="en">
         <body className={inter.className}>
           {/* Common header div included here */}
-          <Header session={session} status={status} />
-          {children}  {/* This will render the specific page content */}
+          <AuthWrapper>
+            <Header/>
+            {children}  {/* This will render the specific page content */}
+          </AuthWrapper>
         </body>
       </html>
-  );
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
-  
-  return (
-    <SessionProvider>
-      <LayoutContent>{children}</LayoutContent>
-    </SessionProvider>
   );
 }
