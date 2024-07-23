@@ -33,7 +33,7 @@ export default function Page() {
           <p className="relative z-10 antialiased text-xl text-white md:text-3xl md:leading-normal">
             Are you looking for a place to buy or sell exquisite handcrafted
             products? <br />
-            <strong>You've found the perfect destination</strong>
+            <strong>You&apos;ve found the perfect destination</strong>
           </p>
           <Link
             href="/login"
@@ -58,12 +58,12 @@ export default function Page() {
             <br />
             Just like our users, each item is one-of-a-kind and crafted with
             care. Join our user-friendly platform to{" "}
-            <strong>discover exactly what you're looking for</strong> or
+            <strong>discover exactly what you&apos;re looking for</strong> or
             showcase your artistry to the world.
             <br />
             <br />
-            <strong>Your style and creativity are in demand</strong>, and we're
-            here to connect you with those who appreciate it. Don't wait another
+            <strong>Your style and creativity are in demand</strong>, and we&apos;re
+            here to connect you with those who appreciate it. Don&apos;t wait another
             moment. Create your account today and become part of our community.
           </p>
         </div>
