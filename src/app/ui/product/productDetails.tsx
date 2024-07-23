@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Product } from '@/app/lib/definitions';
 import { getProductById } from '@/app/lib/data';
 
 export default async function ProductDetails({ id }: { id: string }) {

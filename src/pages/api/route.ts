@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import cloudinary from "../../src/app/lib/cloudinary";
+import cloudinary from "@/app/lib/cloudinary";
 import multer from "multer";
 import nextConnect from "next-connect";
 import { IncomingMessage, ServerResponse } from "http";

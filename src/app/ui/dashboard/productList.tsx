@@ -15,6 +15,7 @@ const ProductList: React.FC<ProductListProps> = ({
   products,
 	categories
 }) => {
+
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const [minPrice, setMinPrice] = useState<number | null>(null);
 	const [maxPrice, setMaxPrice] = useState<number | null>(null);
