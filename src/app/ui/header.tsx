@@ -25,9 +25,9 @@ export default async function Header() {
       </div>
 
       <div className="absolute top-0 left-0 p-4 flex">
-        <Link key={user?.id} href={`/dashboard`} legacyBehavior shallow={true}>
-          <a className="block p-2 border rounded-lg shadow hover:bg-gray-100  mx-4">
-            <p className="text-customBlue">Home</p>
+        <Link key={user?.id} href={`/dashboard`} legacyBehavior shallow={true} className="">
+          <a className="block p-2 border rounded-lg shadow hover:bg-blue-950  mx-4">
+            <p className="text-white">Home</p>
           </a>
         </Link>
       </div>
@@ -38,8 +38,8 @@ export default async function Header() {
           <p className="text-white absolute bottom-0 left-0 p-4">Welcome, {user?.name}</p>
           <div className="absolute top-0 right-0 p-4 flex">
             <Link key={user?.id} href={`/profile`} legacyBehavior>
-              <a className="block p-2 border rounded-lg shadow hover:bg-gray-100  mx-4">
-                <p className="text-customBlue">My Profile</p>
+              <a className="block p-2 border rounded-lg shadow hover:bg-blue-950 mx-4">
+                <p className="text-white">My Profile</p>
               </a>
             </Link>
             <form
@@ -48,7 +48,7 @@ export default async function Header() {
                 await signOut();
               }}
             >
-              <button className="flex h-[40px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+              <button className="flex h-[40px] w-full grow items-center justify-center gap-2 border rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
                 <div className="hidden md:block">Log Out</div>
               </button>
             </form>

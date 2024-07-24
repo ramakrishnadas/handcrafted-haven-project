@@ -292,6 +292,25 @@ export async function createProduct(
 }
 
 export async function deleteProduct(id: string) {
+
+  let productReviews;
+  // Check if product has reviews
+  try {
+    productReviews = await sql`SELECT * FROM reviews_and_ratings WHERE product_id = ${id}`;
+  } catch (error) {
+    return { message: "Database Error: Failed to retrieve Reviews and Ratings."};
+  }
+
+  // Delete product's reviews and ratings
+  if (productReviews.rows.length > 0) {
+    try {
+      await sql`DELETE FROM reviews_and_ratings WHERE product_id = ${id}`;
+    } catch (error) {
+      return { message: "Database Error: Failed to delete Reviews and Ratings."}
+    }
+  }
+
+  // Delete product
   try {
     await sql`DELETE FROM products WHERE id = ${id}`;
     revalidatePath("/profile");
