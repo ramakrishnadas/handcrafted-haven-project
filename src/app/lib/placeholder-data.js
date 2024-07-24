@@ -1,30 +1,30 @@
 const users = [
-    {
-      id: '00d69a19-2ad6-4f40-a14a-51628bc5b5f8',
-      name: 'Alice Smith',
-      email: 'alice@example.com',
-      password: 'password123',
-      profile_image: null,
-      user_story: null
-    },
-    {
-			id: '70f79bd9-a154-496e-a1da-528576e53897',
-			name: 'Bob Johnson',
-			email: 'bob@example.com',
-			password: 'password456',
-			profile_image: 'bob_profile.jpg',
-			user_story: 'I love hiking and outdoor adventures.'
-    },
-		{
-			id: '2fe21b44-acf6-43da-af7c-06cc1f109b51',
-			name: 'Carol Williams',
-			email: 'carol@example.com',
-			password: 'password789',
-			profile_image: null,
-			user_story: 'Passionate about cooking and baking.'
-		}
-  ];
-  
+	{
+		id: '00d69a19-2ad6-4f40-a14a-51628bc5b5f8',
+		name: 'Alice Smith',
+		email: 'alice@example.com',
+		password: 'password123',
+		profile_image: null,
+		user_story: null
+	},
+	{
+		id: '70f79bd9-a154-496e-a1da-528576e53897',
+		name: 'Bob Johnson',
+		email: 'bob@example.com',
+		password: 'password456',
+		profile_image: 'bob_profile.jpg',
+		user_story: 'I love hiking and outdoor adventures.'
+	},
+	{
+		id: '2fe21b44-acf6-43da-af7c-06cc1f109b51',
+		name: 'Carol Williams',
+		email: 'carol@example.com',
+		password: 'password789',
+		profile_image: null,
+		user_story: 'Passionate about cooking and baking.'
+	}
+];
+
 const products = [
 	{
 		id: 'cac9cdf7-b6d5-407d-99b3-f93ef4eef2e3',
@@ -57,7 +57,7 @@ const products = [
 		stock: 150
 	}
 ];
-  
+
 const reviews_and_ratings = [
 	{
 		user_id: users[0].id,
@@ -78,7 +78,7 @@ const reviews_and_ratings = [
 		rating: 5
 	}
 ];
-  
+
 module.exports = {
 	users,
 	products,

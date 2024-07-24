@@ -97,11 +97,11 @@ async function seedReviewsAndRatings(client) {
     // Create the "reviews_and_ratings" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS reviews_and_ratings (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         user_id UUID NOT NULL REFERENCES users(id),
         product_id UUID NOT NULL REFERENCES products(id),
         review TEXT NOT NULL,
-        rating INTEGER CHECK (rating >= 0 AND rating <= 5) NOT NULL,
-        PRIMARY KEY (user_id, product_id)
+        rating INTEGER CHECK (rating >= 0 AND rating <= 5) NOT NULL
       );
     `;
 

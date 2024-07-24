@@ -331,13 +331,14 @@ export async function deleteProduct(id: string) {
 
 // Define the Review and Rating schema using zod
 const ReviewAndRatingSchema = z.object({
+  id: z.string(),
   user_id: z.string(),
   product_id: z.string(),
   review: z.string().min(1, "Review is required."),
   rating: z.number().min(1, "Rating is required."),
 });
 
-const CreateReviewAndRating = ReviewAndRatingSchema.omit({ user_id: true });
+const CreateReviewAndRating = ReviewAndRatingSchema.omit({ user_id: true, id: true });
 
 export type State4 = {
   errors?: {
