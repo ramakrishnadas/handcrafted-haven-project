@@ -16,7 +16,7 @@ export default function CreateForm() {
   const [state, formAction] = useFormState(createProductWithId, initialState);
 
   const [file, setFile] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string>("/placeholder_product.jpg");
+  const [imageUrl, setImageUrl] = useState<string>("/placeholder_product.png");
   const [imageUrl2, setImageUrl2] = useState<string>(
     "/placeholder_product.jpg"
   );
