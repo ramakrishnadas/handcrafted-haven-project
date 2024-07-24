@@ -3,8 +3,8 @@ export type User = {
     name: string;
     email: string;
     password: string;
-    profile_image: string;
-    user_story: string;
+    profile_image: string | null;
+    user_story: string | null;
 };
 
 export type Product = {
