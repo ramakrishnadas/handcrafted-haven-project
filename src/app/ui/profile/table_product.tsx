@@ -17,7 +17,7 @@ export default async function ProductTable({ userId, profileType }: { userId: st
         {profileType == "authenticated" ? (
           <h1 className="text-center text-3xl font-bold mb-8 text-gray-900">My Products</h1>
         ) : (
-          <h1 className="text-center text-3xl font-bold mb-8 text-gray-900">Seller&apos;s Products</h1>
+          <h1 className="text-center text-3xl font-bold mb-8 text-gray-900">Seller&apos;s Products ({products.length})</h1>
         )}
         
         {products?.map((product) => (
