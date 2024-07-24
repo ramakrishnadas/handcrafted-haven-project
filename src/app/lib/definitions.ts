@@ -31,3 +31,10 @@ export type ReviewAndRating = {
   user_name: string;
   user_profile_image: string;
 }
+
+export type Seller = {
+  id: string;
+  name: string;
+  profile_image: string;
+  product_count: number;
+}

@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { signOut, auth } from "../../auth";
 
-
 export default async function Header() {
   const session = await auth();
   const user = session?.user ? { id: session.user.id || '', name: session.user.name || '' } : null;
@@ -35,7 +34,8 @@ export default async function Header() {
             <Link href="/dashboard" className="text-white hover:bg-blue-500 p-2 border rounded-lg w-full md:w-auto text-center">
               Home
             </Link>
-            <Link href="/profile" className="text-white hover:bg-blue-500 p-2 border rounded-lg w-full md:w-auto text-center">
+
+            <Link key={user?.id} href={`/profile/${user?.id}`} className="text-white hover:bg-blue-500 p-2 border rounded-lg w-full md:w-auto text-center">
               My Profile
             </Link>
             <form
