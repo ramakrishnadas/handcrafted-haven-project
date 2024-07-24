@@ -13,7 +13,7 @@ export default function ProfileForm({ userData }: { userData: User }) {
   const [state, formAction] = useFormState(updateProfileWithId, initialState);
 
   let firstImage = userData.profile_image;
-  if (!firstImage.startsWith("https")) {
+  if (!firstImage?.startsWith("https")) {
     firstImage = "/placeholder_profile.png";
   }
 
@@ -181,7 +181,7 @@ export default function ProfileForm({ userData }: { userData: User }) {
             <textarea
               id="userStory"
               name="userStory"
-              defaultValue={userData.user_story}
+              defaultValue={userData.user_story ?? ""}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
