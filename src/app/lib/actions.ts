@@ -164,9 +164,12 @@ export async function updateUser(
     return { message: "Database Error: Failed to Update User." };
   }
 
-  revalidatePath("/profile");
+  const session = await auth();
+  const user = session?.user;
+
+  revalidatePath(`/profile/${user?.id}`);
   revalidatePath(`/profile/${id}/edit_profile`);
-  redirect("/profile");
+  redirect(`/profile/${user?.id}`);
 }
 
 const UserSchema2 = z.object({
@@ -237,9 +240,12 @@ export async function updateProduct(
     return { message: "Database Error: Failed to Update User." };
   }
 
-  revalidatePath("/profile");
+  const session = await auth();
+  const user = session?.user;
+
+  revalidatePath(`/profile/${user?.id}`);
   revalidatePath(`/profile/${id}/edit_product`);
-  redirect("/profile");
+  redirect(`/profile/${user?.id}`);
 }
 
 export async function createProduct(
@@ -286,9 +292,12 @@ export async function createProduct(
     return { message: "Database Error: Failed to Create Product." };
   }
 
-  revalidatePath("/profile");
+  const session = await auth();
+  const user = session?.user;
+
+  revalidatePath(`/profile/${user?.id}`);
   revalidatePath(`/profile/create`);
-  redirect("/profile");
+  redirect(`/profile/${user?.id}`);
 }
 
 export async function deleteProduct(id: string) {
