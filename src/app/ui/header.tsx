@@ -2,58 +2,64 @@ import Image from "next/image";
 import Link from "next/link";
 import { signOut, auth } from "../../auth";
 
+interface User {
+  id: string;
+  name: string;
+}
+
 export default async function Header() {
   const session = await auth();
-
-  const user = session?.user;
+  const user = session?.user ? { id: session.user.id || '', name: session.user.name || '' } : null;
 
   return (
-    <div className="relative">
-
-      <div className="flex h-20 shrink-0 items-center justify-center rounded-lg bg-customGreen p-4 md:h-52">
-        {/* Insert logo here */}
-        <Image
-          src="/logo.png"
-          alt="Handcrafted Haven Logo"
-          width={150}
-          height={150}
-          className="object-contain"
-        />
-        <h1 className="text-2xl md:text-5xl font-bold text-center text-white mt-4 mb-2">
-          Handcrafted Haven
-        </h1>
-      </div>      
-
-      {session && (
-        <>
-          <div className="absolute top-0 left-0 p-4 flex">
-            <Link key={user?.id} href={`/dashboard`} legacyBehavior shallow={true} className="">
-              <a className="block p-2 border rounded-lg shadow hover:bg-blue-950  mx-4">
-                <p className="text-white">Home</p>
-              </a>
+    <div className="relative bg-customGreen p-4">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
+        {/* Logo and Title */}
+        <div className="flex items-center w-full md:w-auto">
+          <Image
+            src="/logo.png"
+            alt="Handcrafted Haven Logo"
+            width={50}
+            height={50}
+            className="object-contain"
+          />
+          <Link href="/" className="ml-3 text-xl md:text-3xl font-bold text-white">
+            Handcrafted Haven
+          </Link>
+          {session && (
+            <div className="text-white md:ml-4 mt-2 md:mt-0">
+              Welcome, {user?.name}
+            </div>
+          )}
+        </div>
+        
+        {/* Navigation Links */}
+        {session && (
+          <div className="flex flex-col md:flex-row items-center w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-4">
+            <Link href="/dashboard" className="text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg w-full md:w-auto text-center">
+              Home
             </Link>
-          </div>
-          <p className="text-white absolute bottom-0 left-0 p-4">Welcome, {user?.name}</p>
-          <div className="absolute top-0 right-0 p-4 flex">
-            <Link key={user?.id} href={`/profile`} legacyBehavior>
-              <a className="block p-2 border rounded-lg shadow hover:bg-blue-950 mx-4">
-                <p className="text-white">My Profile</p>
-              </a>
+            <Link href="/profile" className="text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg w-full md:w-auto text-center">
+              My Profile
             </Link>
             <form
               action={async () => {
                 "use server";
                 await signOut();
               }}
+              method="post"
+              className="w-full md:w-auto"
             >
-              <button className="flex h-[40px] w-full grow items-center justify-center gap-2 border rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
-                <div className="hidden md:block">Log Out</div>
+              <button
+                type="submit"
+                className="text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg w-full md:w-auto text-center"
+              >
+                Log Out
               </button>
             </form>
           </div>
-        </>
-      )}
+        )}
+      </div>
     </div>
-    
   );
 }
