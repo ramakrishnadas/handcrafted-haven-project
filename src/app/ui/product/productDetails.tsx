@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { getProductById, getSellerData } from "@/app/lib/data";
 import Link from "next/link";
+import { revalidatePath } from "next/cache";
 
 export default async function ProductDetails({ id }: { id: string }) {
+  
+  revalidatePath(`/product/${id}`);
+
   const product = await getProductById(id);
   const seller = await getSellerData(id);
 
