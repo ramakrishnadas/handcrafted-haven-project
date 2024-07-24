@@ -2,17 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { signOut, auth } from "../../auth";
 
-interface User {
-  id: string;
-  name: string;
-}
 
 export default async function Header() {
   const session = await auth();
   const user = session?.user ? { id: session.user.id || '', name: session.user.name || '' } : null;
 
   return (
-    <div className="relative bg-customGreen p-4">
+    <div className="relative bg-customGreen p-9">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
         {/* Logo and Title */}
         <div className="flex items-center w-full md:w-auto">
@@ -36,10 +32,10 @@ export default async function Header() {
         {/* Navigation Links */}
         {session && (
           <div className="flex flex-col md:flex-row items-center w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-4">
-            <Link href="/dashboard" className="text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg w-full md:w-auto text-center">
+            <Link href="/dashboard" className="text-white hover:bg-blue-500 p-2 border rounded-lg w-full md:w-auto text-center">
               Home
             </Link>
-            <Link href="/profile" className="text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg w-full md:w-auto text-center">
+            <Link href="/profile" className="text-white hover:bg-blue-500 p-2 border rounded-lg w-full md:w-auto text-center">
               My Profile
             </Link>
             <form
@@ -47,12 +43,11 @@ export default async function Header() {
                 "use server";
                 await signOut();
               }}
-              method="post"
               className="w-full md:w-auto"
             >
               <button
                 type="submit"
-                className="text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg w-full md:w-auto text-center"
+                className="text-white hover:bg-blue-500 p-2 border rounded-lg w-full md:w-auto text-center"
               >
                 Log Out
               </button>
