@@ -1,6 +1,11 @@
 import {fetchFilteredProductDetails} from '../../../lib/data';
 import ProductForm from '../../../ui/profile/product_form';
 import { revalidatePath } from "next/cache";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Edit Product'
+}
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;

@@ -1,6 +1,11 @@
 import UserTable from "@/app/ui/profile/table_user";
 import ProductTable from "@/app/ui/profile/table_product";
 import { auth } from "@/auth";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Profile'
+}
 
 export default async function Page() {
   
