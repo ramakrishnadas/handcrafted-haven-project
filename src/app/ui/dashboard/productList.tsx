@@ -62,7 +62,7 @@ const ProductList: React.FC<ProductListProps> = ({
         <ul className="flex flex-col md:flex-col">
           <li className="mb-4">
             <strong>Category</strong>
-            <ul className="flex md:flex-col">
+            <ul className="flex flex-col">
               {categories.map((category) => (
                 <li key={category} className="mb-2 md:mb-0 md:mr-2">
                   <button
