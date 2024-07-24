@@ -1,5 +1,5 @@
 import { revalidatePath } from 'next/cache';
-import { User, Product, Category, ReviewAndRating } from './definitions';
+import { User, Product, Category, ReviewAndRating, Seller } from './definitions';
 import { sql } from '@vercel/postgres';
 import { Red_Rose } from 'next/font/google';
 
@@ -201,5 +201,23 @@ export async function getReviewsAndRatingsByProduct(
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the reviews and ratings by product.');
+  }
+}
+
+export async function getSellerData(id: string) {
+  try {
+    const user = await sql<Seller>`
+      SELECT u.id, u.name, u.profile_image,
+        (SELECT COUNT(*) FROM products WHERE user_id = u.id) AS product_count 
+      FROM users u
+      JOIN products p
+      ON p.user_id = u.id
+      WHERE p.id = ${id} 
+    `;
+
+    return user.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch seller.');
   }
 }

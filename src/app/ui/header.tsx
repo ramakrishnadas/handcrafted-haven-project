@@ -35,7 +35,7 @@ export default async function Header() {
           </div>
           <p className="text-white absolute bottom-0 left-0 p-4">Welcome, {user?.name}</p>
           <div className="absolute top-0 right-0 p-4 flex">
-            <Link key={user?.id} href={`/profile`} legacyBehavior>
+            <Link key={user?.id} href={`/profile/${user?.id}`} legacyBehavior>
               <a className="block p-2 border rounded-lg shadow hover:bg-blue-950 mx-4">
                 <p className="text-white">My Profile</p>
               </a>

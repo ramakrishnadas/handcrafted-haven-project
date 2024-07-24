@@ -7,14 +7,19 @@ import {
 } from "@/app/ui/profile/button";
 import { revalidatePath } from "next/cache";
 
-export default async function ProductTable({ userId }: { userId: string }) {
+export default async function ProductTable({ userId, profileType }: { userId: string, profileType: string }) {
   revalidatePath(`/profile`);
   const products = await fetchFilteredProductsByUser(userId);
 
   return (
     <div className="container mx-auto p-8">
       <ul className="bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-center text-3xl font-bold mb-8 text-gray-900">My Products</h1>
+        {profileType == "authenticated" ? (
+          <h1 className="text-center text-3xl font-bold mb-8 text-gray-900">My Products</h1>
+        ) : (
+          <h1 className="text-center text-3xl font-bold mb-8 text-gray-900">Seller&apos;s Products</h1>
+        )}
+        
         {products?.map((product) => (
           <li
             key={product.id}
@@ -37,16 +42,20 @@ export default async function ProductTable({ userId }: { userId: string }) {
                 <p className="text-lg font-semibold text-gray-700">Price: <span className="font-normal">${product.price}</span></p>
                 <p className="text-lg font-semibold text-gray-700">Stock: <span className="font-normal">{product.stock}</span></p>
               </div>
-              <div className="flex space-x-2">
-                <ProductEditButton productId={product.id} />
-                <DeleteProductButton id={product.id} />
-              </div>
+              {profileType == "authenticated" && (
+                <div className="flex space-x-2">
+                  <ProductEditButton productId={product.id} />
+                  <DeleteProductButton id={product.id} />
+                </div>
+              )}
             </div>
           </li>
         ))}
-        <div className="flex justify-center mt-6">
-          <ProductCreateButton userId={userId} />
-        </div>
+        {profileType == "authenticated" && (
+          <div className="flex justify-center mt-6">
+            <ProductCreateButton userId={userId} />
+          </div>
+        )}
       </ul>
     </div>
 
