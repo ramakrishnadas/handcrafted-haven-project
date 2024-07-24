@@ -2,6 +2,7 @@ import { getProducts, getCategories, getFilteredProducts } from "@/app/lib/data"
 import { Product, Category } from "@/app/lib/definitions";
 import ProductList from "../ui/dashboard/productList";
 import { Metadata } from 'next';
+import { revalidatePath } from "next/cache";
 
 export const metadata: Metadata = {
   title: 'Dashboard'
@@ -22,6 +23,8 @@ export default async function Dashboard({
 		query?: string;
 	}
 }) {
+
+  revalidatePath("/dashboard");
   const query = searchParams?.query || '';
 
   const categoryData = await Promise.all([fetchCategories()]);
