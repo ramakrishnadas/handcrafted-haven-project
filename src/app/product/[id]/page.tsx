@@ -2,7 +2,11 @@
 import CreateReview from "@/app/ui/product/createReview";
 import ProductDetails from "@/app/ui/product/productDetails";
 import ReviewsAndRatings from "@/app/ui/product/reviewsAndRatings";
-import { auth } from "@/auth";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Product'
+}
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   const id = params?.id || "";
