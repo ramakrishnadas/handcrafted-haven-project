@@ -4,6 +4,7 @@ import { getReviewsAndRatingsByProduct } from "@/app/lib/data";
 export default async function ReviewsAndRatings({ productId }: { productId: string; }) {
 
   const reviewsAndRatings = await getReviewsAndRatingsByProduct(productId);
+  console.log(reviewsAndRatings);
 
   const averageRating =
     reviewsAndRatings?.reduce((sum, review) => sum + review.rating, 0) / reviewsAndRatings?.length || 0;
@@ -33,7 +34,7 @@ export default async function ReviewsAndRatings({ productId }: { productId: stri
         </div>
         {reviewsAndRatings?.map((reviewAndRating) => (
           <li
-            key={reviewAndRating.product_id}
+            key={reviewAndRating.id}
             className="flex flex-col sm:flex-row items-center bg-gray-50 rounded-lg p-6 mb-6 shadow-sm"
           >
             <div className="flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">

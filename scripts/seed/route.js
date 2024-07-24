@@ -16,7 +16,7 @@ async function seedUsers(client) {
         name VARCHAR(255) NOT NULL,
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
-        profile_image VARCHAR(255) DEFAULT NULL,
+        profile_image VARCHAR(255) DEFAULT '/placeholder_profile.png',
         user_story TEXT DEFAULT NULL
       );
     `;
