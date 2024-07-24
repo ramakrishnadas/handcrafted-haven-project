@@ -22,19 +22,17 @@ export default async function Header() {
         <h1 className="text-2xl md:text-5xl font-bold text-center text-white mt-4 mb-2">
           Handcrafted Haven
         </h1>
-      </div>
-
-      <div className="absolute top-0 left-0 p-4 flex">
-        <Link key={user?.id} href={`/dashboard`} legacyBehavior shallow={true} className="">
-          <a className="block p-2 border rounded-lg shadow hover:bg-blue-950  mx-4">
-            <p className="text-white">Home</p>
-          </a>
-        </Link>
-      </div>
-      
+      </div>      
 
       {session && (
         <>
+          <div className="absolute top-0 left-0 p-4 flex">
+            <Link key={user?.id} href={`/dashboard`} legacyBehavior shallow={true} className="">
+              <a className="block p-2 border rounded-lg shadow hover:bg-blue-950  mx-4">
+                <p className="text-white">Home</p>
+              </a>
+            </Link>
+          </div>
           <p className="text-white absolute bottom-0 left-0 p-4">Welcome, {user?.name}</p>
           <div className="absolute top-0 right-0 p-4 flex">
             <Link key={user?.id} href={`/profile`} legacyBehavior>
